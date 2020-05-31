@@ -1,0 +1,12 @@
+CMakeFiles/*
+cmake_install.cmake
+Makefile
+libbinheap.so
+libcommon.a
+test_*
+.vscode/*
+build/*
+Debug/*
+install_manifest.txt
+Release/*
+lib/*
