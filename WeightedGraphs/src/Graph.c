@@ -38,6 +38,11 @@ void addEdge(Graph *g, int i, int j, float w){
 
 void fillGraph(Graph *g, float avDensity){
 
+    if(avDensity < 0 || avDensity > 1){
+        printf("Please provide a density in between [0,1]\n");
+        exit(-1);
+    }
+
     srand(10);
     for(size_t i = 0; i < g->N; ++i){
         for(size_t j = 0; j < g->N; ++j){
@@ -68,14 +73,15 @@ void printGraph(Graph *g){
     }
 }
 
-//The following are all auxiliary function for Djikstra's algorithm
+//The following two are auxiliary functions for Djikstra's algorithm
 
 void init_SSSP(Graph *g){
 
     for(size_t i = 0; i < g->N; ++i){
         
         //In our representation N*MAX_WEIGHT + 1 is equivalent to infinity since every minimum path from a node
-        //to another node contains at most once every node of the graph, therefore having distance n*max_weight 
+        //to another node contains every node of the graph at most once, therefore the max distance 
+        //achievable for a minimum path is N*MAX_WEIGHT  
         g->adjacencyList[i].head->d = g->N*MAX_WEIGHT + 1; 
         g->adjacencyList[i].head->pred = NULL;
     }
@@ -101,7 +107,6 @@ void djikstra(Graph *g, int s){
         ListOfNodes *min = extractMin(q);
         ListOfNodes *tmp = min;
 
-        //printf("Min d: %f\n", min->d);
         while(tmp->next != NULL){
             tmp = tmp->next;
             relax(min->head, tmp->head, tmp->weight); //Relax between the extracted node and its neighbour on the queue
@@ -118,8 +123,6 @@ void djikstraHeap(Graph *g, int s){
     g->adjacencyList[s].head->d = 0;
 
     binheap_type *h = build_heap((void *) g->adjacencyList, g->N, g->N, sizeof(ListOfNodes), (total_order_type) compareListsLeq );
-
-    print_heap(h, printList);
 
     while(!is_heap_empty(h)){
 

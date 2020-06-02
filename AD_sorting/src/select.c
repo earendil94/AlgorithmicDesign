@@ -41,7 +41,7 @@ unsigned int naive_select_aux(void *A, const unsigned int i, const size_t elem_s
 
 }
 
-unsigned int select_aux(void *A, const unsigned int i, const size_t elem_size, total_order leq, const unsigned int l, const unsigned int r){
+unsigned int select_aux(void *A, const int i, const size_t elem_size, total_order leq, const int l, const int r){
     
     //Base case for efficiency reasons
     if (r-l <= 10){
@@ -71,30 +71,26 @@ void quick_sort_select(void *A, const unsigned int n,
     quick_sort_select_aux(A, n, elem_size, leq, 0, n-1);
 }
 
-void quick_sort_select_aux(void *A, const unsigned int n, const size_t elem_size, total_order leq, const unsigned int l, const unsigned int r){
+void quick_sort_select_aux(void *A, const int n, const size_t elem_size, total_order leq, const int l, const int r){
     
-    if (r-l <= 10){
-        selectionSortAux(A, elem_size, leq, l, r);
-        return;
-    }   
+
 
     if(l < r){
-        const unsigned int median = select_aux(A, (l+r)/2, elem_size, leq, l, r);
-        const unsigned int p = deterministicPivotPartition(A, elem_size, leq, l, r, median);
-        // printf("\np is: %d\n ", p);
+        if (r-l <= 10){
+            selectionSortAux(A, elem_size, leq, l, r);
+            return;
+        }   
 
-        // for(size_t i = 0; i < n; ++i)
-        // printf("%d ", *((int*)ELEM(i)));
-
-        // printf("\n");
-        quick_sort_select_aux(A, n, elem_size, leq, l, p);
-        quick_sort_select_aux(A, n, elem_size, leq, p+1, r);
+        const int median = select_aux(A, (l+r)/2, elem_size, leq, l, r);
+        int * p = threeWayPartition(A, elem_size, leq, l, r, median);
+        quick_sort_select_aux(A, n, elem_size, leq, l, p[0]-1);
+        quick_sort_select_aux(A, n, elem_size, leq, p[1] + 1, r);
     }
 
 
 }
 
-int deterministicPivotPartition(void *A, const size_t elem_size, total_order leq, const unsigned int l, const unsigned int r, const unsigned int p){
+int deterministicPivotPartition(void *A, const size_t elem_size, total_order leq, const int l, const int r, const int p){
 
     //1. Swap the pivot and the first element of the array
     swap(ELEM(l), ELEM(p), elem_size);
@@ -118,7 +114,7 @@ int deterministicPivotPartition(void *A, const size_t elem_size, total_order leq
     return j;
 }
 
-int * threeWayPartition(void *A, const size_t elem_size, total_order leq, const unsigned int l, const unsigned int r, const unsigned int p){
+int * threeWayPartition(void *A, const size_t elem_size, total_order leq, const int l, const int r, const int p){
 
     //1. Swap the pivot and the first element of the array
     swap(ELEM(l), ELEM(p), elem_size);
@@ -142,7 +138,7 @@ int * threeWayPartition(void *A, const size_t elem_size, total_order leq, const 
         } 
     }
 
-    for(size_t t = 0; t < (eq-l-1); ++t)    
+    for(size_t t = 0; t <= (eq-l-1); ++t)    
         swap(ELEM(j-t), ELEM(l+t), elem_size);
 
     int *pivots = malloc(2*sizeof(int));

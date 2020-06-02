@@ -1,10 +1,11 @@
 #include "quick_sort.h"
 #include "select.h"
+#include "selection_sort.h"
 #include <time.h>
 #include <stdlib.h>
 
-#define CONST_ELEM(index) (const void*) (A+(index*elem_size))
-#define ELEM(index) (A+(index*elem_size))
+#define CONST_ELEM(index) (const void*) (A+((index)*elem_size))
+#define ELEM(index) (A+((index)*elem_size))
 
 void quick_sort(void *A, const unsigned int n, 
                 const size_t elem_size, 
@@ -13,7 +14,7 @@ void quick_sort(void *A, const unsigned int n,
     quick_sort_aux(A, n, elem_size, leq, 0, n-1);
 }
 
-void quick_sort_aux(void *A, const unsigned int n, const size_t elem_size, total_order leq, const int l, const int r){
+void naive_quick_sort_aux(void *A, const unsigned int n, const size_t elem_size, total_order leq, const int l, const int r){
     
     if(l < r){
         int p = partition(A, n, elem_size, leq, l, r);
@@ -22,8 +23,13 @@ void quick_sort_aux(void *A, const unsigned int n, const size_t elem_size, total
     }
 }
 
-void naive_quick_sort_aux(void *A, const unsigned int n, const size_t elem_size, total_order leq, const int l, const int r){
+void quick_sort_aux(void *A, const unsigned int n, const size_t elem_size, total_order leq, const int l, const int r){
     
+    // if (r-l <= 10){
+    //     selectionSortAux(A, elem_size, leq, l, r);
+    //     return;
+    // }   
+
     if(l < r){
         int* p = yathreeWayPartition(A, elem_size, leq, l, r, l);
         quick_sort_aux(A, n, elem_size, leq, l, p[0]-1);
@@ -86,7 +92,7 @@ int * yathreeWayPartition(void *A, const size_t elem_size, total_order leq, cons
         } 
     }
 
-    for(size_t t = 0; t < (eq-l-1); ++t)    
+    for(size_t t = 0; t <= (eq-l-1); ++t)    
         swap(ELEM(j-t), ELEM(l+t), elem_size);
 
     int *pivots = malloc(2*sizeof(int));

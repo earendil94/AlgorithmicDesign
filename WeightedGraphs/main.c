@@ -3,16 +3,24 @@
 
 int main(){
 
-    //We need a way to represent graphs
+    Graph * g = buildDisconnectedGraph(10);
+    fillGraph(g, 0.5);
+    printGraph(g);
+    destroyGraph(g);
+
+    Graph *f;
+
+    printf("*** Execution time test of the Djikstra algorithm ***\n\n");
+    printf("Dimension\tArray Based\t\tHeap Based\n");
 
     for(size_t i = 2; i <= 1024; i*=2){
-        Graph * g = buildDisconnectedGraph(i);
+        g = buildDisconnectedGraph(i);
+        f = buildDisconnectedGraph(i);
         fillGraph(g, 0.4);
-        printf("Average test on dimension %ld, array based: %f\n", i, test(g, 0, djikstra));
+        fillGraph(f, 0.4);
+        printf("%ld\t\t%f\t\t%f\n", i, test(g, 0, djikstra), test(f, 0, djikstraHeap));
         destroyGraph(g);
-        //printf("i : %ld\n", i);
+        destroyGraph(f);
     }
-
-
 
 }

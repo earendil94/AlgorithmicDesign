@@ -49,11 +49,11 @@ void quick_sort_select(void *A, const unsigned int n,
                        const size_t elem_size, 
                        total_order leq);
 
-void quick_sort_select_aux(void *A, const unsigned int n, const size_t elem_size, total_order leq, const unsigned int l, const unsigned int r);
-unsigned int select_aux(void *A, const unsigned int i, const size_t elem_size, total_order leq, const unsigned int l, const unsigned int r);
+void quick_sort_select_aux(void *A, const int n, const size_t elem_size, total_order leq, const int l, const int r);
+unsigned int select_aux(void *A, const int i, const size_t elem_size, total_order leq, const int l, const int r);
 unsigned int naive_select_aux(void *A, const unsigned int i, const size_t elem_size, total_order leq, const unsigned int l, const unsigned int r);
-int deterministicPivotPartition(void *A, const size_t elem_size, total_order leq, const unsigned int l, const unsigned int r, const unsigned int p);
-int * threeWayPartition(void *A, const size_t elem_size, total_order leq, const unsigned int l, const unsigned int r, const unsigned int p);
+int deterministicPivotPartition(void *A, const size_t elem_size, total_order leq, const int l, const int r, const int p);
+int * threeWayPartition(void *A, const size_t elem_size, total_order leq, const int l, const int r, const int p);
 int selectPivot(void *A, unsigned const int l, unsigned const int r, const size_t elem_size, total_order leq);
 void selectionSortAux(void *A, const unsigned int elem_size, total_order leq, const unsigned int l, const unsigned int r);
 #endif // __SELECT__

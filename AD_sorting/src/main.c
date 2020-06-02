@@ -9,17 +9,17 @@
 #include "utilities.h"
 
 #define MAX_SIZE_ALL (1<<11)
-#define MAX_SIZE_NLOGN (1<<20)
+#define MAX_SIZE_NLOGN (1<<22)
 #define ARRAY_SIZE (1<<23)
 
 //***TEST DEFINES****
 
-// #define MAX_SIZE_ALL (1<<20)
-// #define MAX_SIZE_NLOGN (1<<6)
+// #define MAX_SIZE_ALL (1<<7)
+// #define MAX_SIZE_NLOGN (1<<20)
 // #define ARRAY_SIZE (1<<23)
 
 
-#define NUM_OF_REPETITIONS 5
+#define NUM_OF_REPETITIONS 3
 
 void test_and_print(void (*sort)(void *A, const unsigned int n, 
                          const size_t elem_size, 
@@ -111,24 +111,10 @@ int main(int argc, char *argv[])
     printf("\n\n\n");
 
 
-    free(A);
-    free(A_sorted);
-    free(A_rev_sorted);
-
-
-
-
-
-
-
     printf("Size\tQuick Sort\tQuick Sort +\tHeap Sort\n");
     printf("    \t          \t  Select\n");
     printf("    \t(Random Case)\t(Random Case)\t");
     for (; (1<<i)<=MAX_SIZE_NLOGN; i++) {
-
-        A=get_random_int_array(ARRAY_SIZE);
-        A_sorted=malloc(sizeof(int)*ARRAY_SIZE);
-        A_rev_sorted=malloc(sizeof(int)*ARRAY_SIZE);
 
         const unsigned int A_size=1<<i;
         printf("\n2^%d",i);
@@ -142,17 +128,13 @@ int main(int argc, char *argv[])
                        A_size, sizeof(int),
                        leq_int, NUM_OF_REPETITIONS);
 
-        free(A);
-        free(A_sorted);
-        free(A_rev_sorted);
-
     }
 
     printf("\n");
 
-    // free(A);
-    // free(A_sorted);
-    // free(A_rev_sorted);
+    free(A);
+    free(A_sorted);
+    free(A_rev_sorted);
 
 
     //************TEST PART **************//
