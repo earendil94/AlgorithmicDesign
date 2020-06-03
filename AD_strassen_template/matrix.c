@@ -81,16 +81,6 @@ float **allocate_random_matrix(const size_t rows, const size_t cols) {
     }
   }
 
-    printf("Random matrix:\n");
-
-    for(size_t r = 0; r < rows; ++r){
-        for(size_t c = 0; c < cols; ++c){
-            printf("%f\t", A[r][c]);
-        }
-        printf("\n");
-    }
-
-
   return A;
 }
 

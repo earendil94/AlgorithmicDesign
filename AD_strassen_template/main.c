@@ -13,12 +13,10 @@ int main() {
   float **C1 = allocate_matrix(n, n);
 
 
-  printf("n\tStrassen's Alg.\tOptimized Strassen \tNaive Alg.\tSame result\n");
+  printf("n\tStrassen Alg\tOptim Strassen \tNaive Alg.\tSame result\n");
   for (size_t j = 1; j <= n; j *= 2) {
-
-    // printf("%ld\t", j);
-    // fflush(stdout);
-
+    printf("%lu \t", j);
+    fflush(stdout);
     printf("%lf\t", test(strassen_matrix_multiplication, C1, A, B, j));
     fflush(stdout);
     printf("%lf\t", test(optimized_strassen_matrix_multiplication, C0, A, B, j));
@@ -45,7 +43,7 @@ int main() {
 
   C0 = allocate_matrix(r1, c2);
   C1 = allocate_matrix(r1, c2);
-  printf("n\tOptimized Strassen \tNaive Alg.\tSame result\n");
+  printf("\tOptimized Strassen \tNaive Alg.\tSame result\n");
   printf("Odd matrix test\t");
 
   printf("%lf\t", general_test(gen_strassen_matrix_multiplication, C1, A, B, r1, c1, r2, c2));

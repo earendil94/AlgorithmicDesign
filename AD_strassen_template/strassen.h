@@ -29,4 +29,4 @@ void strassen_aux(float **C, float const *const *const A,
                   const size_t A_f_row, const size_t A_f_col,
                   const size_t B_f_row, const size_t B_f_col,
                   const size_t n);
-#endif //__STRASSEN__
+#endif 
