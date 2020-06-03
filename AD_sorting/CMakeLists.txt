@@ -4,7 +4,7 @@ project (sorting)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O4")
-set(BINHEAP_PATH "/mnt/c/BashShared/AlgorithmicDesign/AD_bin_heaps")
+set(BINHEAP_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../AD_bin_heaps")
 
 FILE (GLOB SOURCES "${PROJECT_SOURCE_DIR}/src/*.c"
 	               "${PROJECT_SOURCE_DIR}/include/*.h")

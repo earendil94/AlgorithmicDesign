@@ -8,8 +8,8 @@
 #include "heap_sort.h"
 #include "utilities.h"
 
-#define MAX_SIZE_ALL (1<<11)
-#define MAX_SIZE_NLOGN (1<<22)
+#define MAX_SIZE_ALL (1<<13)
+#define MAX_SIZE_NLOGN (1<<21)
 #define ARRAY_SIZE (1<<23)
 
 //***TEST DEFINES****
